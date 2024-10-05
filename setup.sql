@@ -1,0 +1,4 @@
+DROP DATABASE IF EXISTS passwords;
+
+CREATE DATABASE `passwords` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
+
