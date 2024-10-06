@@ -22,7 +22,11 @@ CREATE TABLE passwords.logins (
     password        LONGBLOB    NOT NULL,
     comment         VARCHAR(2000)    NOT NULL,
     update_time     DATETIME    NOT NULL,
-    PRIMARY KEY (user_name)
+    PRIMARY KEY (user_name),
+    FOREIGN KEY (user_name)
+      REFERENCES users(user_name),
+    FOREIGN KEY (website_name)
+      REFERENCES websites(website_name)
 );
 
 Insert into passwords.websites
@@ -61,7 +65,7 @@ Insert into passwords.logins
  ("blackbelt", "olympic taekwondo academy", aes_encrypt('nobelt', 'secret password'), "many different rankings", '2014-08-26 08:00:00'),
  ("bookwarrior", "cheshire public library", aes_encrypt('bookmark', 'secret password'), "too many books", '2021-06-03 08:00:00'),
  ("bestdriver", "toyota", aes_encrypt('goodspeed', 'secret password'), "comfortable cars", '2023-06-09 08:00:00'),
- ("gurl1479", "BJs wholesale club", aes_encrypt('dropshop', 'secret password'), "variety of fruit", '2022-05-14 08:00:00'),
+ ("gurl479", "BJs wholesale club", aes_encrypt('dropshop', 'secret password'), "variety of fruit", '2022-05-14 08:00:00'),
  ("saleshopstop", "Stop and Shop", aes_encrypt('shopstop', 'secret password'), "lots of food", '2016-12-01 08:00:00'),
  ("savingbrands", "Costco", aes_encrypt('coupon', 'secret password'), "lots of food", '2008-04-15 08:00:00'),
  ("warehouselifter", "Amazon", aes_encrypt('boxes', 'secret password'), "free shipping", '2020-06-10 08:00:00');
