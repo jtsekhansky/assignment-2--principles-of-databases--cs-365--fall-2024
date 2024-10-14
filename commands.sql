@@ -28,5 +28,12 @@ FROM logins, websites
 WHERE logins.website_name = websites.website_name and
 websites.website_url = "https://www.bing.com";
 
+-- Get all the password(user?)-related data, including the password associated with URLs that have https in two or your 10 entries
 
+SELECT logins.user_name, logins.website_name, CAST(aes_decrypt(logins.password, @key_str, @init_vector) AS CHAR), logins.comment, logins.update_time, 
+users.first_name, users.last_name, users.email, websites.website_url
+FROM logins, users, websites
+WHERE 
+logins.website_name = websites.website_name and logins.user_name = users.user_name and website_url LIKE 'https%' LIMIT 1,2;
 
+ -- change a URL associated with one of the passwords in your 10 entries
