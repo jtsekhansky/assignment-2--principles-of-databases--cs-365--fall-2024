@@ -27,11 +27,7 @@ CREATE TABLE logins (
     password        VARBINARY(512)    NOT NULL,
     comment         VARCHAR(2000)    NOT NULL,
     update_time     DATETIME    NOT NULL,
-    PRIMARY KEY (user_name),
-    FOREIGN KEY (user_name)
-      REFERENCES users(user_name),
-    FOREIGN KEY (website_name)
-      REFERENCES websites(website_name)
+    PRIMARY KEY (user_name)
 );
 
 Insert into websites

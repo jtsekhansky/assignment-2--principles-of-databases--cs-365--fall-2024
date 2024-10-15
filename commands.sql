@@ -1,3 +1,4 @@
+SET SQL_SAFE_UPDATES = 0;
 USE passwords;
 
 SET block_encryption_mode = 'aes-256-cbc';
@@ -36,4 +37,34 @@ FROM logins, users, websites
 WHERE 
 logins.website_name = websites.website_name and logins.user_name = users.user_name and website_url LIKE 'https%' LIMIT 1,2;
 
- -- change a URL associated with one of the passwords in your 10 entries
+-- change a URL associated with one of the passwords in your 10 entries
+
+ UPDATE websites
+ SET website_url = "https://www.facebook.com/OTACheshire/" 
+ WHERE
+ websites.website_name in (SELECT logins.website_name FROM logins WHERE CAST(aes_decrypt(logins.password, @key_str, @init_vector) AS CHAR) = 'nobelt');
+
+-- Change any password
+
+ UPDATE logins
+ SET password = aes_encrypt('snowboard', @key_str, @init_vector)
+ WHERE
+ logins.user_name = "jtisawesome";
+
+-- Remove a tuple based on a URL
+
+DELETE FROM websites, users, logins
+USING websites, users, logins
+WHERE
+websites.website_url = "https://www.bjs.com" AND
+websites.website_name = logins.website_name AND
+logins.user_name = users.user_name;
+
+ -- Remove a tuple based on a password
+
+ DELETE FROM websites, users, logins
+USING websites, users, logins
+WHERE
+CAST(aes_decrypt(logins.password, @key_str, @init_vector) AS CHAR) = "roomdorm" AND
+websites.website_name = logins.website_name AND
+logins.user_name = users.user_name;
