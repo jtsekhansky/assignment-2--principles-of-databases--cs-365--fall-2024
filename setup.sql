@@ -70,3 +70,5 @@ Insert into logins
  ("saleshopstop", "Stop and Shop", aes_encrypt('shopstop', @key_str, @init_vector), "lots of food", '2016-12-01 08:00:00'),
  ("savingbrands", "Costco", aes_encrypt('coupon', @key_str, @init_vector), "lots of food", '2008-04-15 08:00:00'),
  ("warehouselifter", "Amazon", aes_encrypt('boxes', @key_str, @init_vector), "free shipping", '2020-06-10 08:00:00');
+
+ SOURCE commands.sql;

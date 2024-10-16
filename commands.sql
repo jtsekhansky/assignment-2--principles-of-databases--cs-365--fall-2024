@@ -47,7 +47,8 @@ logins.website_name = websites.website_name and logins.user_name = users.user_na
 -- Change any password
 
  UPDATE logins
- SET password = aes_encrypt('snowboard', @key_str, @init_vector)
+ SET password = aes_encrypt('snowboard', @key_str, @init_vector),
+ update_time = CURRENT_TIMESTAMP()
  WHERE
  logins.user_name = "jtisawesome";
 
